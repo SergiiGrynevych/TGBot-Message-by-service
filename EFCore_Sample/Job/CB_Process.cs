@@ -11,8 +11,6 @@ namespace EFCore_Sample.Job
     [DisallowConcurrentExecution]
     public class CB_Process : IJob
     {
-
-
         ITelegramBotClient _bot { get; set; }
         public CB_Process(ITelegramBotClient bot) 
         { 
@@ -20,7 +18,6 @@ namespace EFCore_Sample.Job
         }
         public async Task Execute(IJobExecutionContext context)
         {
-            
             try
             {
                 int id;
@@ -36,13 +33,11 @@ namespace EFCore_Sample.Job
                     ITelegramBotClient bot = new TelegramBotClient(ConfigurationApp.TGToken);
                     var t = await _bot.SendTextMessageAsync(el, data.Lines[id].Phrase);
                 }
-
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }
-            
         }
 
         private Root LoadJson()
